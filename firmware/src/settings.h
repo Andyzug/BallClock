@@ -28,6 +28,7 @@ DB_KEYS(
 
     clock_style,
     clock_color,
+    clock_format,
 
     back_mode,  // 0 none, 1 grad, 2 perlin
     back_pal,

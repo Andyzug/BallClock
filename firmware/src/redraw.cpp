@@ -99,13 +99,27 @@ static void drawClock() {
 
     Datime dt(NTP);
 
+    // Check the clock format setting
+    bool is12HourFormat = db[kk::clock_format].toInt() == 1;
+
+    // Convert to 12-hour format if needed
+    int hour = dt.hour;
+    String period = "";
+    if (is12HourFormat) {
+        if (hour == 0) {
+            hour = 12; // Midnight case
+        } else if (hour > 12) {
+            hour -= 12;
+        }
+    }
+
     switch (db[kk::clock_style].toInt()) {
         case 1:
             matrix.setFont(gfx_font_3x5);
 
             matrix.setCursor(1, 1);
-            if (dt.hour < 10) matrix.print(' ');
-            matrix.print(dt.hour);
+            if (hour < 10) matrix.print(' ');
+            matrix.print(hour);
 
             matrix.setCursor(11, 1);
             if (dt.minute < 10) matrix.print(0);
@@ -118,8 +132,8 @@ static void drawClock() {
             matrix.setFont(font_3x5_diag);
 
             matrix.setCursor(1, 1);
-            if (dt.hour < 10) matrix.print(' ');
-            matrix.print(dt.hour);
+            if (hour < 10) matrix.print(' ');
+            matrix.print(hour);
 
             matrix.setCursor(11, 1);
             if (dt.minute < 10) matrix.print(0);
@@ -131,12 +145,12 @@ static void drawClock() {
         case 3:
             matrix.setFont(font_4x5);
 
-            if (dt.hour >= 10) {
+            if (hour >= 10) {
                 matrix.setCursor(1, 1);
-                matrix.print(dt.hour / 10);
+                matrix.print(hour / 10);
             }
             matrix.setCursor(5, 1);
-            matrix.print(dt.hour % 10);
+            matrix.print(hour % 10);
 
             matrix.setCursor(11, 1);
             matrix.print(dt.minute / 10);

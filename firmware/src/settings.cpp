@@ -148,6 +148,7 @@ LP_TICKER([]() {
 
         db.init(kk::clock_style, 1);
         db.init(kk::clock_color, 0xffffff);
+        db.init(kk::clock_format, 1);
 
         db.init(kk::back_mode, 1);
         db.init(kk::back_pal, 0);
