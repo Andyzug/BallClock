@@ -38,6 +38,7 @@ static void build(sets::Builder& b) {
 
         b.Select(kk::clock_style, "Font", "None;Type 1;Type 2;Type 3");
         b.Color(kk::clock_color, "Color");
+        b.Select(kk::clock_format, "Format", "24-hour;12-hour");
     }
     {
         sets::Group g(b, "Background");
